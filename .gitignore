@@ -1,0 +1,10 @@
+# Secrets
+.env
+
+# Build output
+github_status
+
+# Go temporary files
+*.test
+*.out
+/vendor/

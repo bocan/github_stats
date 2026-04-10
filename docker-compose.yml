@@ -1,0 +1,15 @@
+services:
+  github_status:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8080"   # bind to localhost; put nginx/caddy in front
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+      - GITHUB_USERNAME=bocan        # hardwired; change if you ever fork this
+      - PORT=8080
+    healthcheck:
+      test: ["CMD", "/github_status"]   # distroless has no curl; use the binary
+      interval: 60s
+      timeout: 5s
+      retries: 3
